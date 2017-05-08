@@ -22,6 +22,8 @@ In ACM Transactions on Graphics (SIGGRAPH 2017)
 git clone https://github.com/junyanz/lfv_release.git lfv
 cd lfv
 ```
+- Please modify line 5 in CMakeLists.txt to include the QT5 installation path.
+
 - Download light field video data (e.g. `cats`).
 ```
 bash data/download_lfv.sh cats
