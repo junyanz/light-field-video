@@ -1,0 +1,32 @@
+project(lfv)
+
+cmake_minimum_required(VERSION 2.8)
+set(CMAKE_PREFIX_PATH /home/tcwang0509/Qt5.7.0/5.7/gcc_64)
+
+#set(CMAKE_CXX_STANDARD 14)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+#find_package(Qt5OpenGL REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+find_package(OpenCV 2.4.8 REQUIRED)
+find_package(OpenMP)
+if (OPENMP_FOUND)
+   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+file(GLOB_RECURSE SRCS "src/*.cpp")
+file(GLOB_RECURSE HEADERS "src/*.h")
+
+
+set (INCLUDE_DIRS "")
+foreach (_header ${HEADERS})
+    get_filename_component(_dir ${_header} PATH)
+    list (APPEND INCLUDE_DIRS ${_dir})
+endforeach()
+list(REMOVE_DUPLICATES INCLUDE_DIRS)
+
+include_directories(${INCLUDE_DIRS} ${OPENCV_INCLUDE_DIRS})
+add_executable(lfv ${SRCS} ${HEADERS})
+target_link_libraries(lfv  ${OpenCV_LIBS}  Qt5::Core Qt5::Widgets)# Qt5::OpenGL)
+file(COPY Resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
