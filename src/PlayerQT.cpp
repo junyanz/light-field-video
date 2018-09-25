@@ -112,9 +112,6 @@ void CPlayerView::paint(QPainter* _p) {
         float win_size = 30.0;
         float uf = std::min(1.0f, std::max(0.0f, (dx + win_size) / (2 * win_size)));
         float vf = std::min(1.0f, std::max(0.0f, (dy + win_size) / (2 * win_size)));
-//        int u = round(uf * 8)
-//        printf("(frame, u, v) = (%d, %3.3f, %3.3f)\n", m_frameId, uf, vf);
-//        fflush(stdout);
         tmp = m_lfv->SingleView(m_frameId, uf, vf);
     } else
         tmp = m_lfv->RenderLF(m_frameId, m_alpha, m_aperture);
@@ -138,8 +135,6 @@ void CPlayerView::paint(QPainter* _p) {
     _p->restore();
     if (m_isPlay) {
         double t = timer->Time() * 1000;
-//        printf("time spent %3.3f/%3.3f", t, max_t);
-//        fflush(stdout);
         int remain_t = max_t -t;
         qSleep(remain_t);
     }
@@ -209,8 +204,6 @@ void CPlayerView::updateFocus(QPointF _p, bool _click) {
         }
     }
 
-        //    setAlpha(qreal(_s) / 500);
-//    m_alpha = (s-0.5)*10;
     int alpha_i = (m_alpha / 10.0 + 0.5)*500;
     emit(focusChanged(alpha_i));
     printf("focus (%d, %d), alpha = %3.3f\n", x, y, m_alpha);
@@ -253,7 +246,6 @@ void CPlayerView::reset() {
     emit focusChanged(250);
     emit apertureChanged(1000);
     m_isPlay = false;
-//    m_isTrack = false;
     m_changeFocus = false;
     m_changeView = false;
     m_frameId = 0;

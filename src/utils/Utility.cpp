@@ -51,8 +51,7 @@ int utility::CUtility::FindImageFiles(string fName, vector<string>& nameVec,
 void utility::CUtility::mkdirs( vector<string> _dirNameVec ) {
     FOR (i, (int)_dirNameVec.size()) {
         string dir = _dirNameVec[i];
-        //if (_access(dir.c_str(), 0) == -1)
-            _mkdir(dir.c_str());
+        _mkdir(dir.c_str());
     }
 }
 
@@ -138,7 +137,6 @@ int utility::CUtility::FindImageFiles(string fName, vector<string>& nameVec,
     FOR (i, nImgs) {
         nameVec.push_back(strs[i]._val);
         extVec.push_back(tmpexts[strs[i]._ind]);
-//        cout << strs[i]._val << " " << strs[i]._ind << " " << tmpexts[strs[i]._ind] << endl;
     }
     tmpnames.clear();
     tmpexts.clear();
@@ -199,9 +197,3 @@ void utility::CUtility::mkdirs( string _dirName ) {
     mkdirs(tmp);
     tmp.clear();
 }
-
-string utility::CUtility::fullfile(string _path, string _fName) {
-
-}
-
-

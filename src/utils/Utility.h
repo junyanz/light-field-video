@@ -11,9 +11,8 @@ public:
 			vectorString &extVec);
 	static int itoa(int val, char* buf);
 	static void AddSuffix(vectorString& _nameVec, string _suffix, vectorString& _outNameVec);
-	static void mkdirs( vectorString _dirNameVec);  
-	static void mkdirs(string _dirName); 
-    static string fullfile(string _path, string _fName);
+	static void mkdirs( vectorString _dirNameVec);
+	static void mkdirs(string _dirName);
 private:
 	static bool ParseImageFileName(string& fileName, string& ext);
 };

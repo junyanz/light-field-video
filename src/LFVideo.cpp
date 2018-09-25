@@ -39,7 +39,6 @@ Mat CLFVideo::SingleView(int _frameId, int _viewId) {
 }
 
 Mat CLFVideo::CentralView(int _frameId) {
-//    CheckFrameId(_frameId);
     int view_id = 32;
     return SingleView(_frameId, view_id);
 }
@@ -81,7 +80,6 @@ Mat CLFVideo::RenderLFFull(int _frameId, float _alpha) {
     ImageSet views = m_seq[_frameId];
     Size sz(views[0].cols, views[0].rows);
     double alpha = double(_alpha);
-//    int GRID_SIZE = 8;
     #pragma omp parallel for
     FOR (n, m_numViews) {
         Mat H = Mat::zeros(2, 3, CV_64FC1);
@@ -143,7 +141,6 @@ Mat CLFVideo::RenderLFWeighted(int _frameId, float _alpha, float _aperture) {
 Mat CLFVideo::RenderLF(int _frameId, float _alpha, float _aperture) {
     CheckFrameId(_frameId);
     CheckAperture(_aperture);
-//    DEBUG_INFO("aperture = %3.3f", _aperture);
 
     if (_aperture < 1.0)
         return RenderLFWeighted(_frameId, _alpha, _aperture);
@@ -167,7 +164,6 @@ void CLFVideo::ChangeFocusVideo(string _videoPath, bool _fixFrame) {
         results.push_back(img);
     }
     WriteVideo(results, _videoPath);
-//    WriteImages(results, _videoPath);
 }
 
 float CLFVideo::Disparity(int _frameId, PointF _pos) {
@@ -188,19 +184,14 @@ PointF CLFVideo::TrackPoint(PointF _p, int _frameId) {
     CheckFrameId(_frameId);
     Mat prevIm_u, nextIm_u;
     Mat prevIm = CentralView(_frameId);
-//    cvtColor(prevIm, prevGray, CV_BGR2GRAY);
     prevIm.convertTo(prevIm_u, CV_8U);
     Mat nextIm = CentralView(_frameId+1);
-//    cvtColor(nextIm, nextGray, CV_BGR2GRAY);
     nextIm.convertTo(nextIm_u, CV_8U);
     vector<PointF> prevPnts;
     prevPnts.push_back(_p);
     vector<PointF> nextPnts;
     vector<uchar> featuresFound;
     Mat err;
-//    cout << _p << endl;
-//    SHOW_IMG_WAIT(prevGray_u);
-//    SHOW_IMG_WAIT(nextGray_u);
     int win_size = 41;
     calcOpticalFlowPyrLK(prevIm_u, nextIm_u, prevPnts, nextPnts,
                          featuresFound, err, Size(win_size, win_size));
@@ -232,11 +223,8 @@ void CLFVideo::LoadLFData(string _imgDir) {
     vectorString imgExts;
     utility::CUtility::FindImageFiles(_imgDir, imgNames, imgExts);
     m_seq.clear();
-//    m_seqPad.clear();
     int H = 8;
     int W = 8;
-//    int height = 320;
-//    int width = 544;
     m_numFrames = (int)imgNames.size();
 
     FOR_u (i, imgNames.size()) {
@@ -247,7 +235,6 @@ void CLFVideo::LoadLFData(string _imgDir) {
         int width = largeIm.cols / W;
         m_frameHeight = height;
         m_frameWidth = width;
-//        ImageSet viewsPad;
         ImageSet views;
 
         FOR (h, H) {
@@ -255,17 +242,10 @@ void CLFVideo::LoadLFData(string _imgDir) {
                 Mat view = largeIm(Rect(w*width, h*height, width, height));
                 Mat view_f;
                 view.convertTo(view_f, CV_32FC3);
-//                SHOW_IMG_WAIT(view_f);
-//                views.push_back(view_f);
-//                Mat view_pad;
-//                copyMakeBorder(view_f, view_pad, m_border, m_border, m_border, m_border, BORDER_CONSTANT, Scalar(0.0, 0.0, 0.0));
                 views.push_back(view_f);
-//                SHOW_IMG_WAIT(view_pad);
-//                viewsPad.push_back(view_pad);
             }
         }
         m_seq.push_back(views);
-//        m_seqPad.push_back(viewsPad);
     }
 }
 
@@ -280,7 +260,6 @@ void CLFVideo::LoadDisparity(string _dispDir) {
         string imgPath = _dispDir + imgNames[i] + imgExts[i];
         printf("loading image %s\n", imgPath.c_str());
         Mat disp = imread(imgPath, 0);
-//        cout << disp.channels() << endl;
         m_dispSeq.push_back(disp);
     }
 }

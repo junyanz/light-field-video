@@ -23,7 +23,7 @@ Rect ImageTools::CImageTools::GetDrawingROI( const vector<Point2i>& _points ) {
     return Rect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
 }
 
-cv::Mat ImageTools::CImageTools::TranslateImage( const Mat& _img, PointF _t) { 
+cv::Mat ImageTools::CImageTools::TranslateImage( const Mat& _img, PointF _t) {
     if (_t == PointF(0,0))
         return _img;
     else {
@@ -52,7 +52,7 @@ cv::Mat ImageTools::CImageTools::Float2Unit( const Mat& _img ) {
 cv::Mat ImageTools::CImageTools::ScaleImage( const Mat& _img, float _scale ) {
     Mat out;
     if (abs(_scale-1.0f) < 1e-10f)
-        out = _img; //_img.clone();
+        out = _img;
     else {
         Mat img_s;
         cv::resize(_img, img_s, Size(), _scale, _scale);
@@ -112,7 +112,7 @@ bool ImageTools::CImageTools::IsValidROI( Rect _roi, Size _imgSz ) {
     return true;
 }
 
-cv::Mat ImageTools::CImageTools::IncreaseContrast( const Mat& _img ) {   // increase contrast 
+cv::Mat ImageTools::CImageTools::IncreaseContrast( const Mat& _img ) {   // increase contrast
     float alpha = 1.25f;
     float beta = -25.0f;
     Mat img_f, out;
@@ -124,32 +124,13 @@ cv::Mat ImageTools::CImageTools::IncreaseContrast( const Mat& _img ) {   // incr
 
 
 Rect ImageTools::CImageTools::RecfityROI( Rect _roi, Size _imgSz ) {
-    //Rect out;
-    //int x2, y2;
-    ////out.x = max(0, _roi.x);
-    ////out.y = max(0, _roi.y);
-    //x2 = min(_imgSz.width-1, _roi.x + _roi.width-1);
-    //y2 = min(_imgSz.height-1, _roi.y+_roi.height-1);
-    ////out.x = max(0, )
-    //out.width = _roi.width;
-    //out.height = _roi.height;
-    //out.x = max(0, x2 - _roi.width+1);
-    //out.y = max(0, y2 - _roi.height+1);
-    //return out;
     Rect out;
     int x2, y2;
-    //out.x = max(0, _roi.x);
-    //out.y = max(0, _roi.y);
     x2 = min(_imgSz.width-1, _roi.x + _roi.width-1);
     y2 = min(_imgSz.height-1, _roi.y+_roi.height-1);
     out.x = max(0, _roi.x);
     out.y = max(0, _roi.y);
     out.width = x2 - out.x  + 1;
     out.height = y2 - out.y + 1;
-    //out.x = max(0, )
-    //out.width = _roi.width;
-    //out.height = _roi.height;
-    //out.x = max(0, x2 - _roi.width+1);
-    //out.y = max(0, y2 - _roi.height+1);
     return out;
 }

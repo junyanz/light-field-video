@@ -16,7 +16,7 @@ public:
 public:
     CPlayerView(QWidget *parent, CLFVideo* _lfv, float _s);
     void paint(QPainter *) Q_DECL_OVERRIDE;
-    QSize sizeHint() const Q_DECL_OVERRIDE; // { return QSize(m_frameH*m_ratio, m_frameW*m_ratio); }
+    QSize sizeHint() const Q_DECL_OVERRIDE;
 
     void mousePressEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
