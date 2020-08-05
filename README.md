@@ -8,7 +8,7 @@ C++ implementation for Light field video applications (including video refocusin
 <img src="imgs/teaser.jpg" width="900px"/>
 
 Light Field Video Capture Using a Learning-Based Hybrid Imaging System  
-[Ting-Chun Wang](https://people.eecs.berkeley.edu/~tcwang0509/), [Jun-Yan Zhu](https://people.eecs.berkeley.edu/~junyanz/), [Nima Khademi Kalantari](http://nkhademi.com/), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/), and [Ravi Ramamoorthi](http://cseweb.ucsd.edu/~ravir/)  
+[Ting-Chun Wang](https://tcwang0509.github.io/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/), [Nima Khademi Kalantari](http://nkhademi.com/), [Alexei A. Efros](https://people.eecs.berkeley.edu/~efros/), and [Ravi Ramamoorthi](http://cseweb.ucsd.edu/~ravir/)  
 In ACM Transactions on Graphics (SIGGRAPH 2017)
 
 ### Prerequisites
@@ -103,4 +103,4 @@ If you use this code for your research, please cite our paper.
 
 ## Cat Paper Collection
 If you love cats, and love reading cool graphics, vision, and learning papers, please check out the Cat Paper Collection:  
-[[Github]](https://github.com/junyanz/CatPapers) [[Webpage]](http://people.eecs.berkeley.edu/~junyanz/cat/cat_papers.html)
+[[Github]](https://github.com/junyanz/CatPapers) [[Webpage]](https://www.cs.cmu.edu/~junyanz/cat/cat_papers.html)
